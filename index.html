@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola App</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 24px;
+  }
+  h1 { font-size: 22px; color: #8b949e; font-weight: 500; }
+  #boton {
+    font-size: 28px;
+    font-weight: 700;
+    padding: 28px 48px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(139, 92, 246, .35);
+    transition: transform .1s;
+    width: 100%;
+    max-width: 320px;
+  }
+  #boton:active { transform: scale(.96); }
+  #saludo {
+    font-size: 42px;
+    font-weight: 800;
+    opacity: 0;
+    transform: scale(.5);
+    transition: all .25s cubic-bezier(.2,.8,.4,1);
+  }
+  #saludo.mostrar { opacity: 1; transform: scale(1); }
+  #contador { color: #8b949e; font-size: 14px; }
+</style>
+</head>
+<body>
+  <h1>Probando LaFabricApp</h1>
+  <div id="saludo">¡Hola! 👋</div>
+  <button id="boton">Tocame</button>
+  <div id="contador">Tocadas: 0</div>
+<script>
+  let n = 0;
+  const b = document.getElementById('boton');
+  const s = document.getElementById('saludo');
+  const c = document.getElementById('contador');
+  b.addEventListener('click', () => {
+    n++;
+    c.textContent = 'Tocadas: ' + n;
+    s.classList.remove('mostrar');
+    void s.offsetWidth; // reinicia la animación
+    s.classList.add('mostrar');
+    if (navigator.vibrate) navigator.vibrate(30);
+    setTimeout(() => s.classList.remove('mostrar'), 1500);
+  });
+</script>
+</body>
+</html>
